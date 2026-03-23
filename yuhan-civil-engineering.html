@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>㈜유한토건 — 토공사·포장공사 전문건설</title>
+<meta name="description" content="13년 경험의 토공사·포장공사 전문건설업체 ㈜유한토건. ONE-STOP 부대토목 솔루션 제공."/>
+<style>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOKENS & RESET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root{
+  --bg:#0b0c0e;
+  --bg2:#111316;
+  --bg3:#171a1d;
+  --surface:#1c2026;
+  --border:rgba(255,255,255,.07);
+  --amber:#f5a623;
+  --amber2:#ffc24a;
+  --amber-dim:rgba(245,166,35,.15);
+  --green:#22c55e;
+  --blue:#3b82f6;
+  --white:#f4f1ec;
+  --muted:#7a8494;
+  --muted2:#545c68;
+  --r:8px;
+  --r2:16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+  background:var(--bg);color:var(--white);
+  line-height:1.6;overflow-x:hidden;
+  cursor:none;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{cursor:none;border:none;background:none;font:inherit}
+
+/* ━━━━━ CUSTOM CURSOR ━━━━━ */
+#cursor{
+  position:fixed;width:12px;height:12px;
+  background:var(--amber);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform .12s ease,width .2s,height .2s,opacity .2s;
+  mix-blend-mode:difference;
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1.5px solid rgba(245,166,35,.5);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform .25s ease,width .25s,height .25s,opacity .3s,border-color .2s;
+}
+body:has(a:hover) #cursor,body:has(button:hover) #cursor{width:6px;height:6px}
+body:has(a:hover) #cursor-ring,body:has(button:hover) #cursor-ring{
+  width:56px;height:56px;border-color:var(--amber);
+}
+
+/* ━━━━━ SCROLL PROGRESS ━━━━━ */
+#scroll-progress{
+  position:fixed;top:0;left:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),var(--amber2));
+  z-index:9997;width:0%;transition:width .1s linear;
+}
+
+/* ━━━━━ LOADER ━━━━━ */
+#loader{
+  position:fixed;inset:0;background:var(--bg);
+  z-index:9000;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:1.5rem;
+  transition:opacity .6s ease,visibility .6s ease;
+}
+#loader.done{opacity:0;visibility:hidden}
+.loader-logo{
+  font-size:clamp(1.8rem,4vw,3rem);font-weight:900;
+  letter-spacing:-.03em;color:var(--white);
+}
+.loader-logo span{color:var(--amber)}
+.loader-bar-wrap{
+  width:200px;height:2px;background:var(--surface);border-radius:99px;overflow:hidden;
+}
+.loader-bar{
+  height:100%;background:linear-gradient(90deg,var(--amber),var(--amber2));
+  border-radius:99px;animation:load-bar 1.8s ease forwards;
+}
+@keyframes load-bar{from{width:0}to{width:100%}}
+
+/* ━━━━━ NAVIGATION ━━━━━ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:0 2rem;height:66px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(11,12,14,.5);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s,background .3s;
+}
+nav.solid{border-bottom-color:var(--border);background:rgba(11,12,14,.92)}
+.nav-logo{display:flex;align-items:center;gap:.75rem}
+.logo-mark{
+  width:36px;height:36px;background:var(--amber);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:1rem;color:var(--bg);
+}
+.logo-text{font-weight:800;font-size:.95rem;letter-spacing:-.01em}
+.logo-sub{font-size:.62rem;color:var(--muted);letter-spacing:.1em;margin-top:.1rem}
+.nav-center{display:flex;gap:2rem}
+.nav-center a{
+  font-size:.85rem;color:var(--muted);font-weight:500;
+  transition:color .2s;position:relative;padding:.2rem 0;
+}
+.nav-center a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;
+  background:var(--amber);transform:scaleX(0);transform-origin:left;
+  transition:transform .25s ease;
+}
+.nav-center a:hover{color:var(--white)}
+.nav-center a:hover::after,.nav-center a.active::after{transform:scaleX(1)}
+.nav-center a.active{color:var(--white)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.btn-nav{
+  background:var(--amber);color:var(--bg);
+  padding:.45rem 1.2rem;border-radius:var(--r);
+  font-weight:700;font-size:.82rem;
+  transition:background .2s,transform .15s;
+}
+.btn-nav:hover{background:var(--amber2);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:4px;cursor:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
+
+/* ━━━━━ HERO ━━━━━ */
+#hero{
+  min-height:100svh;position:relative;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 2rem 80px;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:var(--bg);overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(245,166,35,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(245,166,35,.06) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 70% 60% at 60% 40%,black,transparent);
+}
+.hero-glow{
+  position:absolute;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,166,35,.12),transparent 70%);
+  top:-100px;right:-100px;
+  animation:glow-pulse 4s ease-in-out infinite;
+}
+.hero-glow2{
+  position:absolute;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,246,.08),transparent 70%);
+  bottom:-50px;left:20%;
+  animation:glow-pulse 5s ease-in-out infinite reverse;
+}
+@keyframes glow-pulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+
+/* floating shapes */
+.hero-shape{
+  position:absolute;border:1px solid rgba(245,166,35,.12);border-radius:4px;
+  animation:float-shape 8s ease-in-out infinite;
+}
+.shape1{width:80px;height:80px;top:20%;right:15%;animation-delay:0s}
+.shape2{width:40px;height:40px;top:60%;right:25%;animation-delay:2s}
+.shape3{width:60px;height:60px;top:35%;right:35%;animation-delay:4s}
+@keyframes float-shape{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(5deg)}}
+
+.hero-content{position:relative;z-index:1;max-width:1280px;margin:0 auto;width:100%}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid rgba(245,166,35,.35);
+  background:rgba(245,166,35,.06);
+  padding:.35rem 1rem;border-radius:99px;
+  font-size:.75rem;font-weight:700;letter-spacing:.12em;
+  color:var(--amber2);text-transform:uppercase;margin-bottom:2rem;
+}
+.eyebrow-dot{
+  width:6px;height:6px;background:var(--amber2);border-radius:50%;
+  animation:blink 1.5s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-title{
+  font-size:clamp(3rem,8vw,7.5rem);font-weight:900;
+  letter-spacing:-.04em;line-height:1.0;
+  margin-bottom:1.5rem;
+}
+.hero-title .line{overflow:hidden;display:block}
+.hero-title .line-inner{
+  display:block;
+  animation:slide-up .8s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-title .line:nth-child(1) .line-inner{animation-delay:.2s}
+.hero-title .line:nth-child(2) .line-inner{animation-delay:.35s}
+.hero-title .line:nth-child(3) .line-inner{animation-delay:.5s}
+@keyframes slide-up{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+.hero-title .accent{color:var(--amber);position:relative;display:inline-block}
+.hero-title .accent::after{
+  content:'';position:absolute;bottom:4px;left:0;right:0;height:4px;
+  background:var(--amber);opacity:.3;border-radius:2px;
+}
+.hero-subtitle{
+  font-size:clamp(.95rem,1.5vw,1.15rem);color:var(--muted);
+  max-width:480px;line-height:1.8;margin-bottom:2.5rem;
+  animation:fade-in .8s .7s both;
+}
+@keyframes fade-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:fade-in .8s .85s both}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--amber);color:var(--bg);
+  padding:.85rem 2rem;border-radius:var(--r);
+  font-weight:800;font-size:.95rem;
+  transition:background .2s,transform .2s,box-shadow .2s;
+  box-shadow:0 8px 24px rgba(245,166,35,.25);
+}
+.btn-primary:hover{background:var(--amber2);transform:translateY(-3px);box-shadow:0 16px 40px rgba(245,166,35,.35)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.6rem;
+  border:1px solid var(--border);color:var(--muted);
+  padding:.85rem 2rem;border-radius:var(--r);
+  font-weight:600;font-size:.95rem;
+  transition:border-color .2s,color .2s,transform .2s;
+}
+.btn-ghost:hover{border-color:rgba(245,166,35,.4);color:var(--amber2);transform:translateY(-3px)}
+
+.hero-metrics{
+  display:flex;gap:3rem;flex-wrap:wrap;margin-top:4rem;
+  padding-top:2.5rem;border-top:1px solid var(--border);
+  animation:fade-in .8s 1s both;
+}
+.metric-item{}
+.metric-num{
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:900;
+  color:var(--white);letter-spacing:-.04em;line-height:1;
+}
+.metric-num .unit{font-size:.55em;color:var(--amber)}
+.metric-label{font-size:.78rem;color:var(--muted);margin-top:.3rem}
+
+/* ━━━━━ SECTION COMMON ━━━━━ */
+.section{padding:7rem 0}
+.container{max-width:1280px;margin:0 auto;padding:0 2rem}
+.section-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:1rem;
+}
+.section-tag::before{content:'';width:20px;height:1px;background:var(--amber)}
+.section-title{
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:900;
+  letter-spacing:-.03em;line-height:1.15;color:var(--white);
+  margin-bottom:1rem;
+}
+.section-title .amber{color:var(--amber)}
+.section-body{font-size:.95rem;color:var(--muted);max-width:520px;line-height:1.8}
+
+/* ━━━━━ REVEAL ━━━━━ */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease}
+.rv-l.in{opacity:1;transform:none}
+.rv-r{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease}
+.rv-r.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+/* ━━━━━ ABOUT — EDITORIAL SPLIT ━━━━━ */
+#about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-left{}
+.about-company-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);overflow:hidden;margin-top:2.5rem;
+}
+.acc-header{
+  background:var(--amber);padding:1.2rem 1.8rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.acc-header h3{font-size:.82rem;font-weight:800;color:var(--bg);letter-spacing:.08em;text-transform:uppercase}
+.acc-badge{background:var(--bg);color:var(--amber);padding:.25rem .75rem;border-radius:99px;font-size:.72rem;font-weight:800}
+.acc-table{width:100%;border-collapse:collapse}
+.acc-table tr{border-bottom:1px solid var(--border)}
+.acc-table tr:last-child{border-bottom:none}
+.acc-table td{padding:.85rem 1.8rem;font-size:.85rem}
+.acc-table td:first-child{color:var(--muted);width:110px;font-weight:600}
+.acc-table td:last-child{color:var(--white);font-weight:500}
+.about-right{display:flex;flex-direction:column;gap:1.5rem}
+.about-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.about-stat{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);padding:1.5rem;
+  position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s;
+}
+.about-stat:hover{border-color:rgba(245,166,35,.3);transform:translateY(-4px)}
+.about-stat::before{
+  content:'';position:absolute;top:-20px;right:-20px;
+  width:80px;height:80px;border-radius:50%;
+  background:var(--amber-dim);
+}
+.about-stat-num{font-size:2.5rem;font-weight:900;color:var(--amber);letter-spacing:-.04em;line-height:1}
+.about-stat-label{font-size:.78rem;color:var(--muted);margin-top:.4rem;line-height:1.4}
+.vision-card{
+  background:linear-gradient(135deg,var(--amber) 0%,#e8870a 100%);
+  border-radius:var(--r2);padding:2rem;
+  position:relative;overflow:hidden;
+}
+.vision-card::before{
+  content:'';position:absolute;top:-30px;right:-30px;
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,.12);
+}
+.vision-icon{font-size:2rem;margin-bottom:.75rem}
+.vision-title{font-size:1.1rem;font-weight:800;color:var(--bg);margin-bottom:.4rem}
+.vision-text{font-size:.85rem;color:rgba(11,12,14,.65);line-height:1.7}
+
+/* ━━━━━ PROCESS — NEW SECTION ━━━━━ */
+#process{background:var(--bg2)}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;margin-top:3.5rem}
+.process-steps::before{
+  content:'';position:absolute;top:36px;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--amber),var(--amber),transparent);
+  opacity:.3;
+}
+.process-step{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:0 1rem;position:relative;
+  transition:transform .3s;
+}
+.process-step:hover{transform:translateY(-8px)}
+.step-num{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:1.2rem;position:relative;z-index:1;
+  transition:background .3s,border-color .3s;
+}
+.process-step:hover .step-num{background:var(--amber);border-color:var(--amber)}
+.step-num-label{
+  position:absolute;top:-6px;right:-6px;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--amber);color:var(--bg);
+  font-size:.65rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+}
+.step-title{font-size:.92rem;font-weight:700;color:var(--white);margin-bottom:.4rem}
+.step-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+
+/* ━━━━━ SERVICES — TAB + CARD ━━━━━ */
+#services{background:var(--bg)}
+.services-layout{display:grid;grid-template-columns:280px 1fr;gap:2.5rem;margin-top:3rem}
+.service-tabs{display:flex;flex-direction:column;gap:.5rem}
+.service-tab{
+  display:flex;align-items:center;gap:1rem;
+  padding:1.1rem 1.4rem;border-radius:var(--r);
+  background:transparent;border:1px solid transparent;
+  cursor:none;text-align:left;width:100%;
+  transition:background .2s,border-color .2s,transform .2s;
+  color:var(--muted);
+}
+.service-tab:hover{background:var(--surface);color:var(--white);transform:translateX(4px)}
+.service-tab.active{
+  background:var(--surface);border-color:rgba(245,166,35,.3);
+  color:var(--white);transform:translateX(4px);
+}
+.tab-icon{
+  width:40px;height:40px;border-radius:8px;
+  background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+  transition:background .2s;
+}
+.service-tab.active .tab-icon{background:var(--amber)}
+.tab-label{font-weight:700;font-size:.9rem}
+.tab-sub{font-size:.73rem;margin-top:.1rem;opacity:.6}
+.service-tab.active .tab-label,.service-tab.active .tab-sub{color:var(--white)}
+
+.service-panels{}
+.service-panel{display:none}
+.service-panel.active{display:block;animation:panel-in .4s ease}
+@keyframes panel-in{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.panel-header{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2) var(--r2) 0 0;
+  padding:2rem 2.5rem;display:flex;align-items:center;gap:1.5rem;
+  border-bottom:none;
+}
+.panel-icon{
+  width:60px;height:60px;background:var(--amber);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  flex-shrink:0;
+}
+.panel-title{font-size:1.5rem;font-weight:800;color:var(--white)}
+.panel-subtitle{font-size:.83rem;color:var(--muted);margin-top:.25rem}
+.panel-body{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:0 0 var(--r2) var(--r2);
+  padding:2rem 2.5rem;
+}
+.panel-desc{font-size:.92rem;color:var(--muted);line-height:1.8;margin-bottom:2rem;max-width:600px}
+.panel-items{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
+.panel-item{
+  display:flex;align-items:flex-start;gap:.75rem;
+  background:var(--surface);border:1px solid var(--border);
+  padding:1rem 1.2rem;border-radius:var(--r);
+  transition:border-color .2s;
+}
+.panel-item:hover{border-color:rgba(245,166,35,.3)}
+.panel-item-dot{
+  width:8px;height:8px;background:var(--amber);border-radius:50%;
+  margin-top:.45rem;flex-shrink:0;
+}
+.panel-item-text{font-size:.85rem;color:var(--white);font-weight:500;line-height:1.5}
+.onestop-pill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:linear-gradient(135deg,rgba(245,166,35,.15),rgba(245,166,35,.05));
+  border:1px solid rgba(245,166,35,.3);
+  padding:.65rem 1.25rem;border-radius:99px;
+  font-size:.82rem;font-weight:700;color:var(--amber2);
+  margin-top:1.5rem;
+}
+
+/* ━━━━━ PROJECTS — HORIZONTAL SCROLL ━━━━━ */
+#projects{background:var(--bg2)}
+.projects-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.scroll-hint{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.78rem;color:var(--muted2);
+  animation:drift 2s ease-in-out infinite;
+}
+@keyframes drift{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+.projects-track-wrap{overflow:hidden;margin:0 -2rem;padding:0 2rem}
+.projects-track{
+  display:flex;gap:1.5rem;
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  scrollbar-width:none;padding-bottom:1rem;cursor:grab;
+}
+.projects-track:active{cursor:grabbing}
+.projects-track::-webkit-scrollbar{display:none}
+.project-card{
+  flex-shrink:0;width:520px;scroll-snap-align:start;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);overflow:hidden;
+  transition:border-color .3s,transform .3s;
+  position:relative;
+}
+.project-card:hover{border-color:rgba(245,166,35,.35);transform:translateY(-6px)}
+.project-card-top{
+  padding:2rem 2.5rem 1.5rem;
+  border-bottom:1px solid var(--border);
+}
+.project-badges{display:flex;align-items:center;gap:.6rem;margin-bottom:1.25rem}
+.badge{
+  padding:.3rem .75rem;border-radius:99px;
+  font-size:.72rem;font-weight:700;
+}
+.badge-ongoing{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+.badge-planned{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.25)}
+.badge-num{background:var(--bg3);color:var(--muted);border:1px solid var(--border)}
+.project-title-main{font-size:1.25rem;font-weight:800;color:var(--white);line-height:1.3;margin-bottom:.75rem}
+.project-desc-main{font-size:.85rem;color:var(--muted);line-height:1.75}
+.project-card-bottom{padding:1.5rem 2.5rem}
+.project-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.pmg-item{background:var(--bg3);border-radius:var(--r);padding:.75rem 1rem}
+.pmg-label{font-size:.68rem;color:var(--muted2);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem}
+.pmg-val{font-size:.85rem;font-weight:700;color:var(--white)}
+.project-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.tag{
+  background:var(--bg);border:1px solid var(--border);
+  color:var(--muted);padding:.2rem .65rem;
+  border-radius:4px;font-size:.73rem;font-weight:600;
+  transition:border-color .2s,color .2s;
+}
+.project-card:hover .tag{border-color:rgba(245,166,35,.2);color:rgba(245,166,35,.7)}
+.project-progress{
+  height:3px;background:var(--bg3);margin-top:1.25rem;border-radius:99px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--amber),var(--amber2));
+  transition:width 1s ease;
+}
+
+/* ━━━━━ STRENGTHS — MAGAZINE GRID ━━━━━ */
+#strengths{background:var(--bg)}
+.strengths-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:1.5rem;margin-top:3rem;
+}
+.strength-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);padding:2rem;
+  transition:border-color .3s,transform .3s,background .3s;
+  position:relative;overflow:hidden;
+}
+.strength-card:hover{
+  border-color:rgba(245,166,35,.3);
+  transform:translateY(-5px);
+  background:var(--bg3);
+}
+.strength-card.featured{
+  grid-column:1/3;
+  background:linear-gradient(135deg,rgba(245,166,35,.1) 0%,var(--surface) 100%);
+  border-color:rgba(245,166,35,.25);
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;
+}
+.strength-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--amber),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.strength-card:hover::before{opacity:1}
+.strength-icon{
+  width:52px;height:52px;background:var(--amber-dim);
+  border:1px solid rgba(245,166,35,.2);
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:1.25rem;
+  transition:background .3s;
+}
+.strength-card:hover .strength-icon{background:var(--amber)}
+.strength-title{font-size:1.1rem;font-weight:800;color:var(--white);margin-bottom:.25rem}
+.strength-en{font-size:.72rem;color:var(--amber);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.9rem}
+.strength-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.strength-list li{
+  font-size:.84rem;color:var(--muted);
+  display:flex;align-items:flex-start;gap:.6rem;line-height:1.5;
+}
+.strength-list li::before{content:'→';color:var(--amber);font-weight:700;flex-shrink:0;font-size:.78rem;margin-top:.1rem}
+.featured-stat{text-align:center;padding:1rem}
+.featured-stat-num{font-size:4.5rem;font-weight:900;color:var(--amber);letter-spacing:-.04em;line-height:1}
+.featured-stat-label{font-size:.88rem;color:var(--muted);margin-top:.5rem;line-height:1.6}
+
+/* ━━━━━ FAQ — NEW SECTION ━━━━━ */
+#faq{background:var(--bg2)}
+.faq-grid{display:grid;grid-template-columns:380px 1fr;gap:5rem;align-items:start;margin-top:3rem}
+.faq-left .section-body{margin-top:1rem}
+.faq-contact-card{
+  background:var(--amber);border-radius:var(--r2);
+  padding:2rem;margin-top:2rem;
+}
+.fcc-title{font-size:1.05rem;font-weight:800;color:var(--bg);margin-bottom:.4rem}
+.fcc-sub{font-size:.82rem;color:rgba(11,12,14,.6);margin-bottom:1.2rem;line-height:1.6}
+.fcc-phone{
+  display:flex;align-items:center;gap:.6rem;
+  background:var(--bg);color:var(--white);
+  padding:.75rem 1.2rem;border-radius:var(--r);
+  font-weight:700;font-size:.95rem;
+  transition:background .2s;
+}
+.fcc-phone:hover{background:var(--bg2)}
+.faq-list{display:flex;flex-direction:column;gap:.75rem}
+.faq-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;
+  transition:border-color .2s;
+}
+.faq-item:hover,.faq-item.open{border-color:rgba(245,166,35,.3)}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1.25rem 1.5rem;cursor:none;width:100%;text-align:left;
+}
+.faq-q-text{font-size:.92rem;font-weight:700;color:var(--white)}
+.faq-icon{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--bg3);display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background .2s,transform .3s;color:var(--muted);
+  font-size:.9rem;
+}
+.faq-item.open .faq-icon{background:var(--amber);color:var(--bg);transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s ease,padding .35s ease;
+}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-inner{padding:0 1.5rem 1.25rem;font-size:.87rem;color:var(--muted);line-height:1.8}
+
+/* ━━━━━ ORGANIZATION ━━━━━ */
+#organization{background:var(--bg)}
+.org-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;align-items:start}
+.org-visual{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);padding:2.5rem;
+}
+.org-visual-title{
+  text-align:center;font-size:.72rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:2rem;
+}
+.org-box{text-align:center}
+.org-ceo{
+  background:var(--amber);color:var(--bg);
+  padding:1rem 2rem;border-radius:var(--r);
+  display:inline-block;font-weight:800;
+  margin-bottom:2rem;position:relative;
+}
+.org-ceo-name{font-size:.8rem;font-weight:600;margin-top:.2rem;opacity:.7}
+.org-ceo::after{
+  content:'';position:absolute;bottom:-20px;left:50%;
+  transform:translateX(-50%);
+  width:1px;height:20px;background:rgba(245,166,35,.3);
+}
+.org-middle-row{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1.5rem}
+.org-node{
+  background:var(--bg3);border:1px solid var(--border);
+  padding:.8rem 1.2rem;border-radius:var(--r);text-align:center;
+  min-width:100px;position:relative;
+}
+.org-node::before{
+  content:'';position:absolute;top:-20px;left:50%;
+  transform:translateX(-50%);
+  width:1px;height:20px;background:var(--border);
+}
+.org-node-name{font-size:.85rem;font-weight:700;color:var(--white)}
+.org-node-sub{font-size:.7rem;color:var(--muted);margin-top:.1rem}
+.org-leaf-row{display:flex;justify-content:center;gap:.75rem;margin-top:1.5rem}
+.org-leaf{
+  background:var(--bg);border:1px solid var(--border);
+  padding:.6rem 1rem;border-radius:6px;font-size:.75rem;color:var(--muted);font-weight:600;
+}
+.staff-cards{display:flex;flex-direction:column;gap:1rem}
+.staff-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.2rem 1.5rem;
+  display:grid;grid-template-columns:auto 1fr auto;
+  gap:1rem;align-items:center;
+  transition:border-color .2s,transform .2s;
+}
+.staff-card:hover{border-color:rgba(245,166,35,.25);transform:translateX(4px)}
+.staff-avatar{
+  width:44px;height:44px;background:var(--amber-dim);
+  border:1px solid rgba(245,166,35,.2);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.staff-role{font-size:.9rem;font-weight:800;color:var(--white)}
+.staff-dept{font-size:.75rem;color:var(--muted);margin-top:.15rem}
+.staff-duties{font-size:.78rem;color:var(--muted2);line-height:1.5;margin-top:.1rem}
+.staff-badge{
+  background:var(--amber-dim);border:1px solid rgba(245,166,35,.2);
+  color:var(--amber2);padding:.25rem .65rem;border-radius:99px;
+  font-size:.7rem;font-weight:700;white-space:nowrap;align-self:start;
+}
+
+/* ━━━━━ CONTACT ━━━━━ */
+#contact{background:var(--bg2)}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;align-items:start}
+.contact-left{}
+.contact-info-list{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+.ci-item{
+  display:flex;gap:1.2rem;align-items:flex-start;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.2rem 1.5rem;
+  transition:border-color .2s;
+}
+.ci-item:hover{border-color:rgba(245,166,35,.25)}
+.ci-icon{
+  width:42px;height:42px;background:var(--amber-dim);
+  border:1px solid rgba(245,166,35,.2);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.ci-label{font-size:.72rem;color:var(--muted2);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem}
+.ci-val{font-size:.95rem;font-weight:700;color:var(--white)}
+.ci-val-sub{font-size:.78rem;color:var(--muted);margin-top:.15rem}
+.licenses-section{margin-top:2rem}
+.licenses-title{
+  font-size:.72rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:1rem;
+}
+.license-cards{display:flex;flex-direction:column;gap:.6rem}
+.license-card{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:1rem 1.3rem;
+  transition:border-color .2s;
+}
+.license-card:hover{border-color:rgba(245,166,35,.25)}
+.lc-icon{font-size:1.2rem;flex-shrink:0}
+.lc-name{font-size:.88rem;font-weight:700;color:var(--white)}
+.lc-num{font-size:.73rem;color:var(--muted);margin-top:.1rem}
+.contact-right{}
+.contact-cta-box{
+  background:linear-gradient(135deg,var(--amber) 0%,#e8870a 100%);
+  border-radius:var(--r2);padding:2.5rem;
+  position:relative;overflow:hidden;
+}
+.contact-cta-box::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:160px;height:160px;border-radius:50%;
+  background:rgba(255,255,255,.1);
+}
+.ccb-eyebrow{
+  font-size:.72rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(11,12,14,.6);
+  margin-bottom:.75rem;
+}
+.ccb-title{font-size:1.5rem;font-weight:900;color:var(--bg);line-height:1.3;margin-bottom:.75rem;letter-spacing:-.02em}
+.ccb-desc{font-size:.87rem;color:rgba(11,12,14,.6);line-height:1.7;margin-bottom:1.75rem}
+.ccb-phone{
+  display:flex;align-items:center;gap:.75rem;
+  background:var(--bg);color:var(--white);
+  padding:1rem 1.5rem;border-radius:var(--r);
+  font-weight:800;font-size:1.1rem;
+  transition:background .2s,transform .2s;
+  margin-bottom:.75rem;
+}
+.ccb-phone:hover{background:var(--bg2);transform:translateY(-2px)}
+.ccb-note{font-size:.75rem;color:rgba(11,12,14,.5);display:flex;align-items:center;gap:.4rem}
+.project-summary-table{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);overflow:hidden;margin-top:1.5rem;
+}
+.pst-header{
+  background:var(--bg3);padding:.9rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.pst-title{font-size:.75rem;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.pst-count{
+  background:var(--amber-dim);color:var(--amber2);
+  padding:.2rem .65rem;border-radius:99px;font-size:.72rem;font-weight:700;
+}
+table.pst-table{width:100%;border-collapse:collapse}
+table.pst-table th{
+  padding:.65rem 1.2rem;font-size:.72rem;
+  font-weight:700;color:var(--muted2);
+  text-align:left;letter-spacing:.05em;text-transform:uppercase;
+  background:var(--bg3);border-bottom:1px solid var(--border);
+}
+table.pst-table td{
+  padding:.9rem 1.2rem;font-size:.82rem;
+  border-bottom:1px solid var(--border);
+  color:var(--white);
+}
+table.pst-table tr:last-child td{border-bottom:none}
+table.pst-table tr:hover td{background:var(--bg3)}
+
+/* ━━━━━ FOOTER ━━━━━ */
+footer{background:#080a0c;border-top:1px solid var(--border);padding:3rem 0}
+.footer-inner{
+  max-width:1280px;margin:0 auto;padding:0 2rem;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;
+  align-items:start;
+}
+.footer-brand .logo-text{font-size:1.05rem;margin-bottom:.4rem;display:block;color:var(--white)}
+.footer-brand p{font-size:.8rem;color:var(--muted2);line-height:1.6;margin-top:.75rem;max-width:260px}
+.footer-col h4{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col ul li a{font-size:.83rem;color:var(--muted);transition:color .2s}
+.footer-col ul li a:hover{color:var(--amber2)}
+.footer-col p{font-size:.82rem;color:var(--muted);line-height:1.7}
+.footer-bottom{
+  max-width:1280px;margin:2rem auto 0;padding:1.5rem 2rem 0;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-copy{font-size:.75rem;color:var(--muted2)}
+
+/* ━━━━━ FLOATING CTA ━━━━━ */
+#float-cta{
+  position:fixed;bottom:2rem;right:2rem;z-index:500;
+  display:flex;flex-direction:column;gap:.75rem;align-items:flex-end;
+}
+.float-btn{
+  width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;transition:transform .2s,opacity .3s;
+  cursor:none;
+}
+.float-phone{background:var(--amber);color:var(--bg);box-shadow:0 8px 24px rgba(245,166,35,.35)}
+.float-top{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:1rem}
+.float-btn:hover{transform:scale(1.1)}
+
+/* ━━━━━ MOBILE MENU ━━━━━ */
+.mobile-drawer{
+  display:none;position:fixed;
+  top:66px;left:0;right:0;bottom:0;
+  background:rgba(11,12,14,.98);
+  z-index:999;padding:2rem;
+  flex-direction:column;gap:.5rem;
+  backdrop-filter:blur(20px);
+}
+.mobile-drawer.open{display:flex}
+.mobile-drawer a{
+  display:block;font-size:1.2rem;font-weight:700;
+  color:var(--muted);padding:1rem;
+  border-radius:var(--r);transition:background .2s,color .2s;
+}
+.mobile-drawer a:hover{background:var(--surface);color:var(--white)}
+
+/* ━━━━━ HERO IMAGE ━━━━━ */
+.hero-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:.22;
+  filter:grayscale(20%) blur(1px);
+  transition:opacity 1.2s ease;
+}
+.hero-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(11,12,14,.97) 0%,rgba(11,12,14,.85) 55%,rgba(11,12,14,.6) 100%);
+}
+
+/* ━━━━━ GALLERY ━━━━━ */
+#gallery{background:var(--bg2)}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-template-rows:260px 200px;
+  gap:10px;margin-top:3rem;
+}
+.gi1{grid-column:1/6;grid-row:1}
+.gi2{grid-column:6/9;grid-row:1}
+.gi3{grid-column:9/13;grid-row:1}
+.gi4{grid-column:1/5;grid-row:2}
+.gi5{grid-column:5/9;grid-row:2}
+.gi6{grid-column:9/13;grid-row:2}
+.gallery-item{
+  position:relative;overflow:hidden;border-radius:var(--r);
+}
+.gallery-img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .7s cubic-bezier(.25,.46,.45,.94),filter .5s;
+  filter:brightness(.75) saturate(.85);
+}
+.gallery-item:hover .gallery-img{transform:scale(1.08);filter:brightness(.55) saturate(1.15)}
+.gallery-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(11,12,14,.85) 0%,rgba(11,12,14,.1) 55%,transparent 100%);
+  transition:opacity .3s;
+}
+.gallery-meta{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:.9rem 1.1rem;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:.5rem;
+}
+.gallery-meta-text{font-size:.82rem;font-weight:700;color:var(--white);line-height:1.3;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.gallery-meta-badge{
+  background:rgba(245,166,35,.9);color:var(--bg);
+  padding:.2rem .6rem;border-radius:4px;
+  font-size:.65rem;font-weight:800;letter-spacing:.05em;
+  white-space:nowrap;flex-shrink:0;
+}
+.gallery-zoom-icon{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(245,166,35,.9);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+  transition:transform .3s ease,opacity .3s;opacity:0;
+}
+.gallery-item:hover .gallery-zoom-icon{transform:translate(-50%,-50%) scale(1);opacity:1}
+
+/* ━━━━━ PROJECT PHOTO ━━━━━ */
+.project-photo{
+  width:100%;height:196px;overflow:hidden;
+  position:relative;flex-shrink:0;
+}
+.project-photo img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.78) saturate(.82);
+  transition:transform .6s ease,filter .4s;
+}
+.project-card:hover .project-photo img{transform:scale(1.07);filter:brightness(.6) saturate(1.1)}
+.project-photo-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 30%,rgba(28,32,38,.95) 100%);
+}
+.project-photo-label{
+  position:absolute;top:.9rem;left:.9rem;
+  display:flex;gap:.4rem;
+}
+
+/* ━━━━━ SERVICE PANEL IMAGES ━━━━━ */
+.panel-photos{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;
+  margin-top:1.5rem;
+}
+.panel-photo{
+  height:104px;border-radius:var(--r);overflow:hidden;
+  position:relative;
+}
+.panel-photo img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.72) saturate(.8);
+  transition:transform .45s,filter .3s;
+}
+.panel-photo:hover img{transform:scale(1.1);filter:brightness(.55) saturate(1.1)}
+.panel-photo-cap{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,0,0,.78),transparent);
+  padding:.35rem .55rem;font-size:.63rem;font-weight:700;
+  color:rgba(255,255,255,.9);
+}
+
+/* ━━━━━ RESPONSIVE ━━━━━ */
+@media(max-width:1100px){
+  .strengths-grid{grid-template-columns:1fr 1fr}
+  .strength-card.featured{grid-column:auto;display:block}
+  .faq-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,200px)}
+  .gi1,.gi2,.gi3,.gi4,.gi5,.gi6{grid-column:auto;grid-row:auto}
+}
+@media(max-width:900px){
+  .nav-center,.nav-right .btn-nav{display:none}
+  .hamburger{display:flex}
+  .about-grid,.services-layout,.org-layout,.contact-layout{grid-template-columns:1fr}
+  .services-layout{grid-template-columns:1fr}
+  .service-tabs{flex-direction:row;flex-wrap:wrap;gap:.5rem}
+  .service-tab{flex:1;min-width:120px}
+  .process-steps{grid-template-columns:repeat(3,1fr);gap:2rem}
+  .process-steps::before{display:none}
+  .process-step:nth-child(4),.process-step:nth-child(5){grid-column:auto}
+  .hero-metrics{gap:2rem}
+}
+@media(max-width:600px){
+  .section{padding:4rem 0}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .project-card{width:320px}
+  .project-photo{height:160px}
+  .panel-items{grid-template-columns:1fr}
+  .panel-photos{grid-template-columns:1fr 1fr}
+  .strengths-grid{grid-template-columns:1fr}
+  .hero-title{font-size:2.8rem}
+  .footer-inner{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr;grid-template-rows:repeat(6,180px)}
+  .gi1,.gi2,.gi3,.gi4,.gi5,.gi6{grid-column:auto;grid-row:auto}
+  #cursor,#cursor-ring{display:none}
+  body{cursor:auto}
+  button,a{cursor:pointer}
+  .hamburger{cursor:pointer}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<!-- PROGRESS -->
+<div id="scroll-progress"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">㈜<span>유한토건</span></div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="logo-mark">유</div>
+    <div>
+      <div class="logo-text">㈜유한토건</div>
+      <div class="logo-sub">YUHAN CIVIL ENGINEERING</div>
+    </div>
+  </a>
+  <div class="nav-center">
+    <a href="#about">회사소개</a>
+    <a href="#process">시공프로세스</a>
+    <a href="#services">사업분야</a>
+    <a href="#projects">공사실적</a>
+    <a href="#strengths">회사강점</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-right">
+    <a href="#contact" class="btn-nav">무료 견적 문의</a>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="#about" onclick="closeMenu()">회사소개</a>
+  <a href="#process" onclick="closeMenu()">시공 프로세스</a>
+  <a href="#services" onclick="closeMenu()">사업분야</a>
+  <a href="#projects" onclick="closeMenu()">공사실적</a>
+  <a href="#strengths" onclick="회사강점">회사강점</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#contact" onclick="closeMenu()">문의하기</a>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80" alt="건설 현장" loading="eager"/>
+    <div class="hero-img-overlay"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-shape shape1"></div>
+    <div class="hero-shape shape2"></div>
+    <div class="hero-shape shape3"></div>
+  </div>
+  <div class="hero-content container">
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>전문건설업 · 토공사 &amp; 포장공사 이중 등록</div>
+    <h1 class="hero-title">
+      <span class="line"><span class="line-inner">기반을 완성하는</span></span>
+      <span class="line"><span class="line-inner"><span class="accent">13년</span>의 기술,</span></span>
+      <span class="line"><span class="line-inner">㈜유한토건</span></span>
+    </h1>
+    <p class="hero-subtitle">토공사부터 포장공사까지 ONE-STOP으로 수행하는<br />부대토목 전문건설업체입니다. 건축물의 기반을 완성합니다.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 5.18 19.79 19.79 0 01.07 3.42a2 2 0 012-2.18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81A2 2 0 017 9l-1 1a16 16 0 006 6l1-1a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        무료 견적 문의
+      </a>
+      <a href="#projects" class="btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        공사실적 보기
+      </a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric-item">
+        <div class="metric-num"><span class="cnt" data-target="2012">0</span></div>
+        <div class="metric-label">설립연도</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num"><span class="cnt" data-target="13">0</span><span class="unit">년+</span></div>
+        <div class="metric-label">현장 경험 연수</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num"><span class="cnt" data-target="2">0</span><span class="unit">개</span></div>
+        <div class="metric-label">등록 업종</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num"><span class="cnt" data-target="100">0</span><span class="unit">%</span></div>
+        <div class="metric-label">공기 내 준공율</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="rv-l">
+        <div class="section-tag">회사소개</div>
+        <h2 class="section-title">토목의 기반,<br /><span class="amber">유한토건</span>이 만듭니다</h2>
+        <p class="section-body" style="margin-top:1rem">
+          2012년 설립 이후 경기 북부 지역을 중심으로 토공사·포장공사 분야에서 꾸준한 성장을 이어온 전문건설업체입니다.
+          대형 복합시설, 자원순환시설, 산업단지 등 다양한 발주처의 부대토목공사를 단독 시공으로 수행하며
+          재발주율 100%의 신뢰를 구축했습니다.
+        </p>
+        <div class="about-company-card">
+          <div class="acc-header">
+            <h3>회사 기본정보</h3>
+            <span class="acc-badge">2025 현재</span>
+          </div>
+          <table class="acc-table">
+            <tbody>
+              <tr><td>상호</td><td>㈜유한토건</td></tr>
+              <tr><td>대표이사</td><td>김 정 미</td></tr>
+              <tr><td>설립일</td><td>2012년 10월 18일</td></tr>
+              <tr><td>전화</td><td>02-381-5755</td></tr>
+              <tr><td>사업자번호</td><td>220-88-46699</td></tr>
+              <tr><td>건설업등록</td><td>고양-25-가-08</td></tr>
+              <tr><td>업종</td><td>전문건설업 (토공사·포장공사)</td></tr>
+              <tr><td>소재지</td><td>경기도 고양시 덕양구 지정로 20, 611호</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="about-right rv-r">
+        <div class="vision-card">
+          <div class="vision-icon">🎯</div>
+          <div class="vision-title">비전 · Vision</div>
+          <div class="vision-text">
+            "수도권 부대토목 분야 최우선 협력 전문건설사"<br />
+            모든 공사 현장에서 안전·품질·공기를 동시에 달성하는
+            신뢰받는 파트너가 되겠습니다.
+          </div>
+        </div>
+        <div class="about-stat-grid">
+          <div class="about-stat rv d1">
+            <div class="about-stat-num"><span class="cnt-local" data-target="13">13</span>년+</div>
+            <div class="about-stat-label">토공사·포장공사<br />전문 시공 경력</div>
+          </div>
+          <div class="about-stat rv d2">
+            <div class="about-stat-num">2개</div>
+            <div class="about-stat-label">전문건설업<br />이중 등록 업종</div>
+          </div>
+          <div class="about-stat rv d3">
+            <div class="about-stat-num">100%</div>
+            <div class="about-stat-label">공기 내 준공<br />달성율</div>
+          </div>
+          <div class="about-stat rv d4">
+            <div class="about-stat-num">1군</div>
+            <div class="about-stat-label">건설사 협력<br />재발주 신뢰</div>
+          </div>
+        </div>
+        <div class="rv d2" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem">
+          <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem">서비스 지역</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+            <span style="background:var(--amber-dim);border:1px solid rgba(245,166,35,.25);color:var(--amber2);padding:.3rem .8rem;border-radius:99px;font-size:.78rem;font-weight:700">서울</span>
+            <span style="background:var(--amber-dim);border:1px solid rgba(245,166,35,.25);color:var(--amber2);padding:.3rem .8rem;border-radius:99px;font-size:.78rem;font-weight:700">경기 북부</span>
+            <span style="background:var(--amber-dim);border:1px solid rgba(245,166,35,.25);color:var(--amber2);padding:.3rem .8rem;border-radius:99px;font-size:.78rem;font-weight:700">경기 서부</span>
+            <span style="background:var(--amber-dim);border:1px solid rgba(245,166,35,.25);color:var(--amber2);padding:.3rem .8rem;border-radius:99px;font-size:.78rem;font-weight:700">인천</span>
+            <span style="background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:.3rem .8rem;border-radius:99px;font-size:.78rem;font-weight:600">수도권 전역 협의 가능</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section id="gallery" class="section">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:.5rem">
+      <div>
+        <div class="section-tag">현장 사진</div>
+        <h2 class="section-title rv">현장에서 증명하는<br /><span class="amber">실력과 신뢰</span></h2>
+      </div>
+      <p class="section-body rv-r" style="max-width:320px;margin-bottom:.5rem">토공사·포장공사 현장의 생생한 시공 장면을 직접 확인하세요.</p>
+    </div>
+    <div class="gallery-grid rv">
+      <div class="gallery-item gi1">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1590644365607-73f87acf8de1?auto=format&fit=crop&w=900&q=80" alt="굴삭기 토공사 현장" loading="lazy"/>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-zoom-icon">🔍</div>
+        <div class="gallery-meta">
+          <div class="gallery-meta-text">굴삭기 토공사<br />부지 정지 작업</div>
+          <span class="gallery-meta-badge">토공사</span>
+        </div>
+      </div>
+      <div class="gallery-item gi2">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80" alt="아스콘 포장 현장" loading="lazy"/>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-zoom-icon">🔍</div>
+        <div class="gallery-meta">
+          <div class="gallery-meta-text">아스콘 포장</div>
+          <span class="gallery-meta-badge">포장공사</span>
+        </div>
+      </div>
+      <div class="gallery-item gi3">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80" alt="건설 현장 조감" loading="lazy"/>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-zoom-icon">🔍</div>
+        <div class="gallery-meta">
+          <div class="gallery-meta-text">현장 전경</div>
+          <span class="gallery-meta-badge">부대토목</span>
+        </div>
+      </div>
+      <div class="gallery-item gi4">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=700&q=80" alt="배수로 설치 현장" loading="lazy"/>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-zoom-icon">🔍</div>
+        <div class="gallery-meta">
+          <div class="gallery-meta-text">배수로 설치</div>
+          <span class="gallery-meta-badge">부대토목</span>
+        </div>
+      </div>
+      <div class="gallery-item gi5">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=700&q=80" alt="현장 안전관리" loading="lazy"/>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-zoom-icon">🔍</div>
+        <div class="gallery-meta">
+          <div class="gallery-meta-text">현장 안전관리</div>
+          <span class="gallery-meta-badge">안전</span>
+        </div>
+      </div>
+      <div class="gallery-item gi6">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=600&q=80" alt="도로 공사 현장" loading="lazy"/>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-zoom-icon">🔍</div>
+        <div class="gallery-meta">
+          <div class="gallery-meta-text">도로 공사</div>
+          <span class="gallery-meta-badge">포장공사</span>
+        </div>
+      </div>
+    </div>
+    <p class="rv" style="text-align:center;font-size:.78rem;color:var(--muted2);margin-top:1rem">* 현장 이미지는 유사 공사 사례를 포함합니다. 실제 시공 사진은 문의 시 제공 가능합니다.</p>
+  </div>
+</section>
+
+<!-- ══════════ PROCESS (신규) ══════════ -->
+<section id="process" class="section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:.5rem">
+      <div class="section-tag" style="justify-content:center">시공 프로세스</div>
+    </div>
+    <h2 class="section-title rv" style="text-align:center">발주부터 준공까지,<br /><span class="amber">5단계 체계적 관리</span></h2>
+    <p class="section-body rv" style="text-align:center;margin:1rem auto 0">투명하고 신속한 프로세스로 발주처의 시간과 비용을 절감합니다.</p>
+    <div class="process-steps" style="margin-top:3.5rem">
+      <div class="process-step rv d1">
+        <div class="step-num">
+          <span>📋</span>
+          <div class="step-num-label">01</div>
+        </div>
+        <div class="step-title">발주 접수</div>
+        <div class="step-desc">발주처 요청 접수 및 공사 개요 파악, 필요 서류 확인</div>
+      </div>
+      <div class="process-step rv d2">
+        <div class="step-num">
+          <span>🔍</span>
+          <div class="step-num-label">02</div>
+        </div>
+        <div class="step-title">현장 조사</div>
+        <div class="step-desc">현장 답사, 지반 조건·공사 범위 확인, 리스크 분석</div>
+      </div>
+      <div class="process-step rv d3">
+        <div class="step-num">
+          <span>📊</span>
+          <div class="step-num-label">03</div>
+        </div>
+        <div class="step-title">견적 제출</div>
+        <div class="step-desc">물량 산출 및 정밀 견적서 작성, 발주처 요구 반영</div>
+      </div>
+      <div class="process-step rv d4">
+        <div class="step-num">
+          <span>🤝</span>
+          <div class="step-num-label">04</div>
+        </div>
+        <div class="step-title">계약 체결</div>
+        <div class="step-desc">공정표 확정, 안전·품질 계획서 제출, 착공 준비</div>
+      </div>
+      <div class="process-step rv d5">
+        <div class="step-num">
+          <span>🏆</span>
+          <div class="step-num-label">05</div>
+        </div>
+        <div class="step-title">시공 &amp; 준공</div>
+        <div class="step-desc">공기 내 100% 준공, 준공 서류 완비, 하자 보증</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SERVICES ══════════ -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="section-tag">사업분야</div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem">
+      <h2 class="section-title rv">ONE-STOP<br /><span class="amber">부대토목 솔루션</span></h2>
+      <div class="onestop-pill rv-r">
+        ⚡ 토공사 · 포장공사 이중 등록 → ONE-STOP 수행
+      </div>
+    </div>
+    <div class="services-layout rv">
+      <div class="service-tabs">
+        <button class="service-tab active" data-panel="earthwork" onclick="switchTab(this,'earthwork')">
+          <div class="tab-icon">⛏️</div>
+          <div>
+            <div class="tab-label">토공사</div>
+            <div class="tab-sub">Earthworks</div>
+          </div>
+        </button>
+        <button class="service-tab" data-panel="paving" onclick="switchTab(this,'paving')">
+          <div class="tab-icon">🛣️</div>
+          <div>
+            <div class="tab-label">포장공사</div>
+            <div class="tab-sub">Paving Works</div>
+          </div>
+        </button>
+        <button class="service-tab" data-panel="integrated" onclick="switchTab(this,'integrated')">
+          <div class="tab-icon">🏙️</div>
+          <div>
+            <div class="tab-label">통합 부대토목</div>
+            <div class="tab-sub">Integrated Civil</div>
+          </div>
+        </button>
+      </div>
+      <div class="service-panels">
+        <!-- 토공사 -->
+        <div class="service-panel active" id="panel-earthwork">
+          <div class="panel-header">
+            <div class="panel-icon">⛏️</div>
+            <div>
+              <div class="panel-title">토공사 영역</div>
+              <div class="panel-subtitle">등록번호: 고양-25-가-08 · 주력분야: 토공사 시공 전반</div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <p class="panel-desc">
+              부지 정지에서 터파기, 토사 반출까지 현장 조건에 맞는 최적화된 토공사를 수행합니다.
+              대규모 자원순환시설·산업단지 현장에서 검증된 시공 노하우를 보유하고 있습니다.
+            </p>
+            <div class="panel-items">
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">부지 정지 (절토·성토)</div></div>
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">기초 터파기 및 되메우기</div></div>
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">토사 반출·반입</div></div>
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">연약지반 처리</div></div>
+            </div>
+            <div class="panel-photos">
+              <div class="panel-photo">
+                <img src="https://images.unsplash.com/photo-1590644365607-73f87acf8de1?auto=format&fit=crop&w=360&q=75" alt="굴삭기 작업" loading="lazy"/>
+                <div class="panel-photo-cap">굴삭기 터파기</div>
+              </div>
+              <div class="panel-photo">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=360&q=75" alt="부지 정지 작업" loading="lazy"/>
+                <div class="panel-photo-cap">부지 정지</div>
+              </div>
+              <div class="panel-photo">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=360&q=75" alt="토사 반출" loading="lazy"/>
+                <div class="panel-photo-cap">토사 반출</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 포장공사 -->
+        <div class="service-panel" id="panel-paving">
+          <div class="panel-header">
+            <div class="panel-icon">🛣️</div>
+            <div>
+              <div class="panel-title">포장공사 영역</div>
+              <div class="panel-subtitle">등록번호: 고양-25-가-08 · 주력분야: 아스콘 및 콘크리트 포장</div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <p class="panel-desc">
+              아스팔트 콘크리트(아스콘)부터 일반 콘크리트 포장, 주차장 구획까지 포장공사 전 분야를 커버합니다.
+              노반 조성부터 표층 포장, 차선 도색까지 턴키로 수행 가능합니다.
+            </p>
+            <div class="panel-items">
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">아스콘(아스팔트 콘크리트) 포장</div></div>
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">콘크리트 포장</div></div>
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">구내 도로·주차장 포장</div></div>
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">차선 도색 및 안전시설 설치</div></div>
+            </div>
+            <div class="panel-photos">
+              <div class="panel-photo">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=360&q=75" alt="아스콘 포장" loading="lazy"/>
+                <div class="panel-photo-cap">아스콘 포장</div>
+              </div>
+              <div class="panel-photo">
+                <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=360&q=75" alt="도로 포장 작업" loading="lazy"/>
+                <div class="panel-photo-cap">도로 포장</div>
+              </div>
+              <div class="panel-photo">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=360&q=75" alt="주차장 포장" loading="lazy"/>
+                <div class="panel-photo-cap">주차장 포장</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 통합 부대토목 -->
+        <div class="service-panel" id="panel-integrated">
+          <div class="panel-header">
+            <div class="panel-icon">🏙️</div>
+            <div>
+              <div class="panel-title">통합 부대토목</div>
+              <div class="panel-subtitle">설계·시공 일괄(턴키) 수행 가능</div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <p class="panel-desc">
+              토공사와 포장공사를 넘어 배수·옹벽·법면까지 건축물 기반 전체를 책임지는 통합 부대토목 서비스입니다.
+              단일 계약으로 부지 조성에서 마감까지 원스톱 수행합니다.
+            </p>
+            <div class="panel-items">
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">배수로·우오수관 설치</div></div>
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">옹벽·석축 시공</div></div>
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">법면 보호공</div></div>
+              <div class="panel-item"><div class="panel-item-dot"></div><div class="panel-item-text">턴키 (설계·시공 일괄)</div></div>
+            </div>
+            <div class="panel-photos">
+              <div class="panel-photo">
+                <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=360&q=75" alt="옹벽 시공" loading="lazy"/>
+                <div class="panel-photo-cap">옹벽 시공</div>
+              </div>
+              <div class="panel-photo">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=360&q=75" alt="배수로 설치" loading="lazy"/>
+                <div class="panel-photo-cap">배수로 설치</div>
+              </div>
+              <div class="panel-photo">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=360&q=75" alt="턴키 종합 시공" loading="lazy"/>
+                <div class="panel-photo-cap">종합 부대토목</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROJECTS ══════════ -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="projects-intro">
+      <div>
+        <div class="section-tag">공사실적</div>
+        <h2 class="section-title rv">주요 공사 실적</h2>
+      </div>
+      <div class="scroll-hint rv-r">
+        <span>좌우로 스크롤</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+    <div class="projects-track-wrap rv">
+      <div class="projects-track" id="projectsTrack">
+        <!-- Card 01 -->
+        <div class="project-card">
+          <div class="project-photo">
+            <img src="https://images.unsplash.com/photo-1590644365607-73f87acf8de1?auto=format&fit=crop&w=640&q=80" alt="은평 광역자원순환센터 부대토목 현장" loading="lazy"/>
+            <div class="project-photo-overlay"></div>
+            <div class="project-photo-label">
+              <span class="badge badge-ongoing">● 진행중</span>
+            </div>
+          </div>
+          <div class="project-card-top">
+            <div class="project-badges">
+              <span class="badge badge-num">PROJECT 01</span>
+              <span class="badge badge-ongoing">● 진행중</span>
+            </div>
+            <div class="project-title-main">은평 광역자원순환센터<br />건립공사 (부대토목공사)</div>
+            <p class="project-desc-main">
+              광역 자원순환센터 건립에 따른 핵심 부대 토목공사. 대규모 부지 정지 및 토공 반출,
+              기초 다짐·구내 포장 시공 전반을 단독 수행. 토공 반출·배수로 설치·방수 시트 시공 등
+              복합 공종을 ONE-STOP으로 진행 중.
+            </p>
+          </div>
+          <div class="project-card-bottom">
+            <div class="project-meta-grid">
+              <div class="pmg-item"><div class="pmg-label">발주처</div><div class="pmg-val">시엔디건설(주)</div></div>
+              <div class="pmg-item"><div class="pmg-label">공사기간</div><div class="pmg-val">2024.10 ~ 2025.02</div></div>
+              <div class="pmg-item"><div class="pmg-label">참여율</div><div class="pmg-val">100% 단독 시공</div></div>
+              <div class="pmg-item"><div class="pmg-label">공사 규모</div><div class="pmg-val">대규모</div></div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">부대토목</span>
+              <span class="tag">토공사</span>
+              <span class="tag">포장공사</span>
+              <span class="tag">배수로 설치</span>
+              <span class="tag">방수 시트</span>
+            </div>
+            <div class="project-progress">
+              <div class="progress-fill" style="width:85%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Card 02 -->
+        <div class="project-card">
+          <div class="project-photo">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=640&q=80" alt="일산 Complex 외부주차장 조성 현장" loading="lazy"/>
+            <div class="project-photo-overlay"></div>
+            <div class="project-photo-label">
+              <span class="badge badge-planned">● 예정</span>
+            </div>
+          </div>
+          <div class="project-card-top">
+            <div class="project-badges">
+              <span class="badge badge-num">PROJECT 02</span>
+              <span class="badge badge-planned">● 예정</span>
+            </div>
+            <div class="project-title-main">일산 Complex<br />외부주차장 조성공사</div>
+            <p class="project-desc-main">
+              대형 복합시설(Complex)의 이용 편의를 위한 외부 대규모 주차장 조성 공사.
+              노반 조성부터 표층 아스콘 포장, 차선 도색까지 주차장 시공의 전 과정을
+              설계·시공 일괄(턴키) 방식으로 수행 예정.
+            </p>
+          </div>
+          <div class="project-card-bottom">
+            <div class="project-meta-grid">
+              <div class="pmg-item"><div class="pmg-label">발주처</div><div class="pmg-val">(주)바바리안모터스</div></div>
+              <div class="pmg-item"><div class="pmg-label">공사기간</div><div class="pmg-val">2025.06 ~ 2025.07</div></div>
+              <div class="pmg-item"><div class="pmg-label">참여율</div><div class="pmg-val">100% 단독 시공</div></div>
+              <div class="pmg-item"><div class="pmg-label">방식</div><div class="pmg-val">턴키 (설계·시공)</div></div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">주차장 조성</span>
+              <span class="tag">아스콘 포장</span>
+              <span class="tag">차선 도색</span>
+              <span class="tag">턴키</span>
+            </div>
+            <div class="project-progress">
+              <div class="progress-fill" style="width:5%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Card 03 — 역량 소개 카드 -->
+        <div class="project-card" style="background:linear-gradient(135deg,rgba(245,166,35,.12),var(--surface));border-color:rgba(245,166,35,.25)">
+          <div class="project-card-top" style="border-bottom-color:rgba(245,166,35,.15)">
+            <div style="font-size:2.5rem;margin-bottom:1rem">🚀</div>
+            <div class="project-title-main" style="color:var(--amber2)">협력 문의 환영합니다</div>
+            <p class="project-desc-main">
+              민간 대형 발주처 및 1군 건설사와의 협력을 지속 확대하고 있습니다.
+              토공사·포장공사·부대토목 전반에 걸쳐 단독 시공이 가능하며,
+              신속한 견적과 책임 있는 시공으로 응답합니다.
+            </p>
+          </div>
+          <div class="project-card-bottom">
+            <div style="display:flex;flex-direction:column;gap:.75rem">
+              <div style="display:flex;align-items:center;gap:.75rem;padding:.75rem;background:var(--bg);border-radius:8px">
+                <span style="font-size:1.1rem">📞</span>
+                <div>
+                  <div style="font-size:.72rem;color:var(--muted2);font-weight:700;text-transform:uppercase;letter-spacing:.06em">대표 전화</div>
+                  <div style="font-size:.95rem;font-weight:800;color:var(--amber2)">02-381-5755</div>
+                </div>
+              </div>
+              <a href="#contact" class="btn-primary" style="justify-content:center">견적 문의하기</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ STRENGTHS ══════════ -->
+<section id="strengths" class="section">
+  <div class="container">
+    <div class="section-tag">회사강점</div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap">
+      <h2 class="section-title rv">왜 유한토건인가</h2>
+      <p class="section-body rv-r" style="max-width:360px">13년의 현장 검증, 체계적 품질 관리, 발주처 최우선 대응 — 세 가지가 우리의 핵심입니다.</p>
+    </div>
+    <div class="strengths-grid">
+      <div class="strength-card featured rv d1">
+        <div>
+          <div class="strength-icon">🏆</div>
+          <div class="strength-title">100% 단독 시공</div>
+          <div class="strength-en">100% Independent</div>
+          <ul class="strength-list">
+            <li>설립 이후 모든 공사 단독 시공 완수</li>
+            <li>하도급 없는 직접 시공으로 품질 직결 관리</li>
+            <li>공기 내 준공 달성율 100% 유지</li>
+          </ul>
+        </div>
+        <div class="featured-stat">
+          <div class="featured-stat-num">100%</div>
+          <div class="featured-stat-label">공기 내 준공율<br />단독 시공 비율</div>
+        </div>
+      </div>
+      <div class="strength-card rv d2">
+        <div class="strength-icon">🎯</div>
+        <div class="strength-title">전문성</div>
+        <div class="strength-en">Professionalism</div>
+        <ul class="strength-list">
+          <li>13년+ 현장 경험과 시공 노하우</li>
+          <li>토공사·포장공사 이중 전문 역량</li>
+          <li>현장소장 직접 총괄 관리</li>
+        </ul>
+      </div>
+      <div class="strength-card rv d3">
+        <div class="strength-icon">🛡️</div>
+        <div class="strength-title">안전·품질</div>
+        <div class="strength-en">Safety &amp; Quality</div>
+        <ul class="strength-list">
+          <li>현장 안전 관리 최우선 원칙</li>
+          <li>ISO 기준 체계적 품질 관리 시스템</li>
+          <li>안전관리자 전담 상시 배치</li>
+        </ul>
+      </div>
+      <div class="strength-card rv d2">
+        <div class="strength-icon">⚡</div>
+        <div class="strength-title">신속·정확</div>
+        <div class="strength-en">Efficiency</div>
+        <ul class="strength-list">
+          <li>철저한 공정 관리로 납기 준수</li>
+          <li>발주처 요구 사항 즉각 대응</li>
+          <li>돌발 상황 민첩한 대처 능력</li>
+        </ul>
+      </div>
+      <div class="strength-card rv d3">
+        <div class="strength-icon">🤝</div>
+        <div class="strength-title">신뢰성</div>
+        <div class="strength-en">Reliability</div>
+        <ul class="strength-list">
+          <li>1군 건설사와 지속 협력 관계</li>
+          <li>투명한 공사 관리·서류 처리</li>
+          <li>재발주율 100% 달성</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FAQ (신규) ══════════ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="faq-grid">
+      <div class="rv-l">
+        <div class="section-tag">자주 묻는 질문</div>
+        <h2 class="section-title">궁금하신 점이<br />있으신가요?</h2>
+        <p class="section-body" style="margin-top:1rem">발주처와 시공사 간의 신뢰는 소통에서 시작됩니다. 어떤 질문이든 환영합니다.</p>
+        <div class="faq-contact-card">
+          <div class="fcc-title">직접 문의하기</div>
+          <div class="fcc-sub">FAQ에서 답을 찾지 못하셨다면 직접 연락주세요. 빠르게 답변 드립니다.</div>
+          <a href="tel:02-381-5755" class="fcc-phone">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 5.18 19.79 19.79 0 01.07 3.42a2 2 0 012-2.18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81A2 2 0 017 9l-1 1a16 16 0 006 6l1-1a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            02-381-5755
+          </a>
+        </div>
+      </div>
+      <div class="faq-list rv-r">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">토공사와 포장공사를 동시에 발주할 수 있나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">네, 가능합니다. 토공사와 포장공사 이중 등록 업체로서 두 공종을 하나의 계약으로 ONE-STOP 수행합니다. 별도의 업체를 선정·관리하는 번거로움 없이 부지 정지부터 포장 마감까지 일괄 처리가 가능합니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">견적은 어떻게 받을 수 있나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">전화(02-381-5755) 또는 이메일로 공사 도면·설계서·현장 위치를 보내주시면 현장 답사 후 정밀 견적서를 제출해 드립니다. 통상 현장 답사 후 3~5 영업일 내 견적이 가능합니다. 견적 문의는 무료입니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">소규모 공사도 수주 가능한가요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">규모에 따라 다르나, 소규모 주차장 포장부터 대형 부지 조성까지 폭넓게 수행합니다. 규모나 예산과 무관하게 먼저 연락주시면 검토 후 안내해 드립니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">서울 및 수도권 전 지역 시공이 가능한가요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">주요 시공 지역은 경기 북부·서부, 서울, 인천입니다. 수도권 외 지역도 규모와 조건에 따라 협의 가능하니 문의 부탁드립니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">하도급 없이 직접 시공하나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">네, 모든 공사를 직접 시공합니다. 하도급 없이 당사 소속 현장소장·토목기술자·안전관리자가 현장을 직접 관리하며, 이것이 높은 품질과 공기 준수의 핵심 요인입니다.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">설계도가 없어도 견적이 가능한가요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">현장 답사만으로도 개략 견적은 가능합니다. 설계 단계부터 참여하는 턴키(설계·시공 일괄) 방식도 지원하오니, 도면 없이도 문의 주시면 최적의 방안을 제안해 드립니다.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ORGANIZATION ══════════ -->
+<section id="organization" class="section" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-tag">조직·인력</div>
+    <h2 class="section-title rv">체계적 조직,<br /><span class="amber">전문 인력 보유</span></h2>
+    <div class="org-layout">
+      <div class="org-visual rv-l">
+        <div class="org-visual-title">㈜유한토건 조직도</div>
+        <div class="org-box">
+          <div class="org-ceo">
+            대표이사
+            <div class="org-ceo-name">김 정 미</div>
+          </div>
+          <div class="org-middle-row">
+            <div class="org-node">
+              <div class="org-node-name">이사</div>
+            </div>
+            <div class="org-node">
+              <div class="org-node-name">총무부</div>
+              <div class="org-node-sub">General Affairs</div>
+            </div>
+            <div class="org-node">
+              <div class="org-node-name">공사부</div>
+              <div class="org-node-sub">Construction Dept.</div>
+            </div>
+          </div>
+          <div class="org-leaf-row">
+            <div class="org-leaf">공무/세무팀</div>
+            <div class="org-leaf">현장관리팀</div>
+          </div>
+        </div>
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+          <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem">전문인력 자격 현황</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+            <span style="background:var(--amber-dim);border:1px solid rgba(245,166,35,.2);color:var(--amber2);padding:.3rem .8rem;border-radius:99px;font-size:.75rem;font-weight:700">현장소장</span>
+            <span style="background:var(--amber-dim);border:1px solid rgba(245,166,35,.2);color:var(--amber2);padding:.3rem .8rem;border-radius:99px;font-size:.75rem;font-weight:700">토목기술자</span>
+            <span style="background:var(--amber-dim);border:1px solid rgba(245,166,35,.2);color:var(--amber2);padding:.3rem .8rem;border-radius:99px;font-size:.75rem;font-weight:700">안전관리자</span>
+            <span style="background:var(--amber-dim);border:1px solid rgba(245,166,35,.2);color:var(--amber2);padding:.3rem .8rem;border-radius:99px;font-size:.75rem;font-weight:700">공무담당</span>
+          </div>
+        </div>
+      </div>
+      <div class="staff-cards rv-r">
+        <div class="staff-card">
+          <div class="staff-avatar">👷</div>
+          <div>
+            <div class="staff-role">현장소장</div>
+            <div class="staff-dept">현장관리팀</div>
+            <div class="staff-duties">토공사·포장공사 현장 총괄 및 공정 관리</div>
+          </div>
+          <span class="staff-badge">핵심</span>
+        </div>
+        <div class="staff-card">
+          <div class="staff-avatar">📐</div>
+          <div>
+            <div class="staff-role">토목기술자</div>
+            <div class="staff-dept">공사부</div>
+            <div class="staff-duties">공사 설계 검토, 기술 지원, 물량 산출</div>
+          </div>
+          <span class="staff-badge">전문직</span>
+        </div>
+        <div class="staff-card">
+          <div class="staff-avatar">⛑️</div>
+          <div>
+            <div class="staff-role">안전관리자</div>
+            <div class="staff-dept">현장관리팀</div>
+            <div class="staff-duties">현장 안전 점검, 위험성 평가, 안전 교육</div>
+          </div>
+          <span class="staff-badge">상시배치</span>
+        </div>
+        <div class="staff-card">
+          <div class="staff-avatar">📋</div>
+          <div>
+            <div class="staff-role">공무담당</div>
+            <div class="staff-dept">공무/세무팀</div>
+            <div class="staff-duties">대관 업무, 기성 청구, 준공 서류 관리</div>
+          </div>
+          <span class="staff-badge">행정전문</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-tag">문의하기</div>
+    <h2 class="section-title rv">견적 문의 &amp;<br /><span class="amber">협력 제안</span> 환영</h2>
+    <div class="contact-layout">
+      <div class="contact-left rv-l">
+        <div class="contact-info-list">
+          <div class="ci-item">
+            <div class="ci-icon">📍</div>
+            <div>
+              <div class="ci-label">소재지</div>
+              <div class="ci-val">경기도 고양시 덕양구 지정로 20, 611호</div>
+              <div class="ci-val-sub">북한산 엘스페이스</div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">📞</div>
+            <div>
+              <div class="ci-label">전화</div>
+              <div class="ci-val">02-381-5755</div>
+              <div class="ci-val-sub">평일 09:00 ~ 18:00</div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon">👤</div>
+            <div>
+              <div class="ci-label">대표이사</div>
+              <div class="ci-val">김 정 미</div>
+              <div class="ci-val-sub">직접 상담 가능</div>
+            </div>
+          </div>
+        </div>
+        <div class="licenses-section">
+          <div class="licenses-title">보유 면허 · 등록증</div>
+          <div class="license-cards">
+            <div class="license-card">
+              <div class="lc-icon">🪪</div>
+              <div>
+                <div class="lc-name">전문건설업 — 토공사</div>
+                <div class="lc-num">등록번호: 고양-25-가-08 · 등록기관: 고양시</div>
+              </div>
+            </div>
+            <div class="license-card">
+              <div class="lc-icon">🪪</div>
+              <div>
+                <div class="lc-name">전문건설업 — 포장공사</div>
+                <div class="lc-num">등록번호: 고양-25-가-08 · 등록기관: 고양시</div>
+              </div>
+            </div>
+            <div class="license-card">
+              <div class="lc-icon">🏢</div>
+              <div>
+                <div class="lc-name">사업자등록증</div>
+                <div class="lc-num">사업자번호: 220-88-46699 · 법인번호: 110111-4983197</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-right rv-r">
+        <div class="contact-cta-box">
+          <div class="ccb-eyebrow">FREE CONSULTATION</div>
+          <div class="ccb-title">무료 견적 &amp; 현장 상담을<br />신청하세요</div>
+          <div class="ccb-desc">
+            도면·설계서 없이도 현장 위치와 공사 개요만으로 상담 가능합니다.
+            연락주시면 빠른 시일 내에 현장 답사 및 견적서를 제출해 드립니다.
+          </div>
+          <a href="tel:02-381-5755" class="ccb-phone">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 5.18 19.79 19.79 0 01.07 3.42a2 2 0 012-2.18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81A2 2 0 017 9l-1 1a16 16 0 006 6l1-1a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            02-381-5755
+          </a>
+          <div class="ccb-note">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            평일 09:00 ~ 18:00 · 급한 경우 문자 남겨주시면 확인 후 연락드립니다
+          </div>
+        </div>
+        <div class="project-summary-table">
+          <div class="pst-header">
+            <span class="pst-title">실적 요약</span>
+            <span class="pst-count">2건 수행</span>
+          </div>
+          <table class="pst-table">
+            <thead>
+              <tr>
+                <th>공사명</th>
+                <th>발주처</th>
+                <th>기간</th>
+                <th>상태</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:700">은평 광역자원순환센터 부대토목</td>
+                <td style="color:var(--muted)">시엔디건설(주)</td>
+                <td style="color:var(--muted)">24.10~25.02</td>
+                <td><span class="badge badge-ongoing" style="font-size:.7rem">진행중</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:700">일산 Complex 외부주차장 조성</td>
+                <td style="color:var(--muted)">(주)바바리안모터스</td>
+                <td style="color:var(--muted)">25.06~25.07</td>
+                <td><span class="badge badge-planned" style="font-size:.7rem">예정</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+        <div class="logo-mark">유</div>
+        <span class="logo-text" style="font-size:1.05rem">㈜유한토건</span>
+      </div>
+      <p>토공사·포장공사 전문건설업체.<br />13년의 경험으로 수도권 건설 현장의<br />기반을 완성합니다.</p>
+    </div>
+    <div class="footer-col">
+      <h4>사이트맵</h4>
+      <ul>
+        <li><a href="#about">회사소개</a></li>
+        <li><a href="#process">시공 프로세스</a></li>
+        <li><a href="#services">사업분야</a></li>
+        <li><a href="#projects">공사실적</a></li>
+        <li><a href="#strengths">회사강점</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">문의하기</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>연락처</h4>
+      <p>경기도 고양시 덕양구<br />지정로 20, 611호<br />북한산 엘스페이스<br /><br />Tel. 02-381-5755<br />대표이사: 김 정 미<br />사업자번호: 220-88-46699</p>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <div class="footer-copy">© 2025 ㈜유한토건. All Rights Reserved. | 건설업등록번호: 고양-25-가-08</div>
+    <div class="footer-copy">YUHAN CIVIL ENGINEERING CO., LTD</div>
+  </div>
+</footer>
+
+<!-- ══════════ FLOATING CTA ══════════ -->
+<div id="float-cta">
+  <button class="float-btn float-top" onclick="scrollTop()" title="맨 위로">↑</button>
+  <a href="tel:02-381-5755" class="float-btn float-phone" title="전화하기">📞</a>
+</div>
+
+<!-- ══════════ SCRIPTS ══════════ -->
+<script>
+/* ── LOADER ── */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('done'), 2000);
+});
+
+/* ── CURSOR ── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = -100, my = -100, rx = -100, ry = -100;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function loop(){
+  if(cur) { cur.style.left = mx+'px'; cur.style.top = my+'px'; }
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  if(ring) { ring.style.left = rx+'px'; ring.style.top = ry+'px'; }
+  requestAnimationFrame(loop);
+})();
+
+/* ── SCROLL PROGRESS ── */
+const prog = document.getElementById('scroll-progress');
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  const h = document.body.scrollHeight - window.innerHeight;
+  prog.style.width = (window.scrollY / h * 100) + '%';
+  nav.classList.toggle('solid', window.scrollY > 40);
+  document.getElementById('float-cta').style.opacity = window.scrollY > 300 ? '1' : '0';
+});
+
+/* ── REVEAL ── */
+const rvEls = document.querySelectorAll('.rv,.rv-l,.rv-r');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+rvEls.forEach(el => io.observe(el));
+
+/* ── COUNTER ── */
+function animNum(el, target, dur = 1400, startDelay = 0) {
+  setTimeout(() => {
+    let start = null;
+    const from = parseInt(el.textContent) || 0;
+    function step(ts) {
+      if(!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (target - from) * e);
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }, startDelay);
+}
+// Hero counters on load
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.querySelectorAll('.cnt').forEach((el, i) => {
+      animNum(el, parseInt(el.dataset.target), 1600, i * 120 + 1800);
+    });
+  }, 100);
+});
+
+/* ── MOBILE MENU ── */
+function toggleMenu() {
+  const d = document.getElementById('mobileDrawer');
+  d.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileDrawer').classList.remove('open');
+}
+
+/* ── SERVICE TABS ── */
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + panelId).classList.add('active');
+}
+
+/* ── FAQ ACCORDION ── */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+/* ── HORIZONTAL DRAG SCROLL ── */
+const track = document.getElementById('projectsTrack');
+if(track) {
+  let isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', e => {
+    isDown = true; track.style.cursor = 'grabbing';
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  document.addEventListener('mouseup', () => { isDown = false; if(track) track.style.cursor = 'grab'; });
+  track.addEventListener('mousemove', e => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+}
+
+/* ── SCROLL TOP ── */
+function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+/* ── ACTIVE NAV ── */
+const navLinks = document.querySelectorAll('.nav-center a');
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+});
+
+/* init float-cta hidden */
+document.getElementById('float-cta').style.opacity = '0';
+document.getElementById('float-cta').style.transition = 'opacity .3s';
+</script>
+</body>
+</html>
